@@ -1,0 +1,9 @@
+git pull
+
+cd backend && source venv/Scripts/Activate && uvicorn app.main:app --reload
+
+cd frontend && npm run dev
+
+git add .
+git commit -m "message"
+git push
