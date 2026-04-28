@@ -1,79 +1,205 @@
-import { useState, useEffect } from 'react'
-import { Container, Box, Typography, Grid, CircularProgress, Alert } from '@mui/material'
-import ResourceCard from '../components/ResourceCard'
-import axiosInstance from '../api/axios'
+import { useState } from 'react';
+import { Search, Launch, Work } from '@mui/icons-material';
 
-interface Resource {
-  id: number
-  name: string
-  description: string
-  url: string
-  category: string
-  tags: string[]
+// --- Types ---
+// Defining the structure of an internship platform based on the sitemap requirements
+interface InternshipPlatform {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+  tags: string[];
 }
 
-const Internships = () => {
-  const [resources, setResources] = useState<Resource[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    const fetchResources = async () => {
-      try {
-        setLoading(true)
-        const response = await axiosInstance.get('/resources/internships')
-        setResources(response.data)
-      } catch (err) {
-        setError('Failed to load resources')
-        console.error(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchResources()
-  }, [])
-
-  if (loading) {
-    return (
-      <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
-        <CircularProgress />
-      </Container>
-    )
+// --- Mock Data ---
+// Preloaded data as requested in the sitemap for MVP phase
+const PLATFORMS: InternshipPlatform[] = [
+  {
+    id: '1',
+    name: 'Internshala',
+    url: 'https://internshala.com',
+    description: 'India\'s largest internship and online training platform. Great for finding entry-level opportunities across various domains.',
+    tags: ['Tech', 'Non-Tech', 'Paid', 'Remote', 'In-Office']
+  },
+  {
+    id: '2',
+    name: 'HelloIntern',
+    url: 'https://www.hellointern.com/',
+    description: 'A platform connecting students with startups and global organizations for meaningful internship experiences.',
+    tags: ['Startups', 'Remote', 'Unpaid', 'Global']
+  },
+  {
+    id: '3',
+    name: 'Wellfound (formerly AngelList)',
+    url: 'https://wellfound.com',
+    description: 'The go-to platform for startup jobs and internships. Connect directly with founders and hiring managers.',
+    tags: ['Tech', 'Startups', 'Paid', 'Remote']
+  },
+  {
+    id: '4',
+    name: 'LinkedIn',
+    url: 'https://linkedin.com',
+    description: 'Professional networking platform with a massive job board. Best for corporate internships and networking-driven applications.',
+    tags: ['Corporate', 'All-Fields', 'Networking', 'Paid']
+  },
+  {
+    id: '5',
+    name: 'Y Combinator Work at a Startup',
+    url: 'https://www.workatastartup.com/',
+    description: 'Apply to hundreds of Y Combinator-backed startups with a single application.',
+    tags: ['Tech', 'Startups', 'High-Paying', 'Remote']
+  },
+  {
+    id: '6',
+    name: 'Glassdoor',
+    url: 'https://www.glassdoor.com',
+    description: 'Search for internships while simultaneously checking company reviews, salaries, and interview questions.',
+    tags: ['Corporate', 'Reviews', 'All-Fields']
   }
+];
 
-  if (error) {
+export default function Internships() {
+  // State for the search functionality
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter platforms based on the search query (matching name, description, or tags)
+  const filteredPlatforms = PLATFORMS.filter(platform => {
+    const query = searchQuery.toLowerCase();
     return (
-      <Container maxWidth="lg">
-        <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>
-      </Container>
-    )
-  }
+      platform.name.toLowerCase().includes(query) ||
+      platform.description.toLowerCase().includes(query) ||
+      platform.tags.some(tag => tag.toLowerCase().includes(query))
+    );
+  });
+
+  // Helper function to assign a specific icon or color based on tag name
+  const getTagStyle = (tag: string) => {
+    const t = tag.toLowerCase();
+    if (t.includes('remote')) return 'bg-blue-50 text-blue-600 border-blue-200';
+    if (t.includes('paid') || t.includes('paying')) return 'bg-emerald-50 text-emerald-600 border-emerald-200';
+    if (t.includes('tech')) return 'bg-purple-50 text-purple-600 border-purple-200';
+    if (t.includes('startup')) return 'bg-orange-50 text-orange-600 border-orange-200';
+    return 'bg-gray-50 text-gray-600 border-gray-200';
+  };
 
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
-          Internships
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Platforms like Internshala, HelloIntern, and other curated internship opportunities.
-        </Typography>
-      </Box>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Add custom keyframes for entry animation */}
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
 
-      {resources.length === 0 ? (
-        <Alert severity="info">No internships available yet.</Alert>
-      ) : (
-        <Grid container spacing={3}>
-          {resources.map((resource) => (
-            <Grid item xs={12} sm={6} md={4} key={resource.id}>
-              <ResourceCard {...resource} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
-    </Container>
-  )
+      {/* Header Section */}
+      <div className="max-w-7xl mx-auto mb-12 text-center">
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 sm:text-5xl drop-shadow-sm tracking-tight pb-2">
+          Internship Platforms
+        </h1>
+        <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+          A curated list of the best websites to find internships. Filter by remote, paid, tech, and more to kickstart your career.
+        </p>
+      </div>
+
+      {/* Search and Filter Section */}
+      <div className="max-w-3xl mx-auto mb-12 transition-transform duration-300 hover:scale-[1.02]">
+        <div className="relative rounded-2xl shadow-lg bg-white">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <Search className="h-6 w-6 text-indigo-400" aria-hidden="true" />
+          </div>
+          <input
+            type="text"
+            className="focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 sm:text-lg border-gray-200 rounded-2xl py-4 border shadow-sm transition-all duration-300 outline-none"
+            placeholder="Search for platforms, tags (e.g., 'remote', 'tech')..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {/* Responsive Grid Layout for Cards */}
+      {/* Adjusted grid to 4 columns on large screens to make cards narrower */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {filteredPlatforms.length > 0 ? (
+          filteredPlatforms.map((platform, index) => (
+            <div 
+              key={platform.id} 
+              className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 ease-out transform hover:-translate-y-2 flex flex-col border border-gray-100 overflow-hidden relative"
+              style={{ 
+                animation: `fadeUp 0.6s ease-out forwards`,
+                animationDelay: `${index * 0.1}s`,
+                opacity: 0 
+              }}
+            >
+              {/* Decorative top border that expands on hover */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+
+              {/* Card Header - Reduced padding and text size */}
+              <div className="p-5 pb-3 border-b border-gray-50 flex justify-between items-start">
+                <h2 className="text-xl font-extrabold text-gray-800 tracking-tight group-hover:text-indigo-600 transition-colors duration-300">
+                  {platform.name}
+                </h2>
+                <a 
+                  href={platform.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-indigo-600 transition-all duration-300 transform hover:scale-110 hover:rotate-12"
+                  title={`Visit ${platform.name}`}
+                >
+                  <Launch className="h-5 w-5" />
+                </a>
+              </div>
+              
+              {/* Card Body - Reduced padding and text size */}
+              <div className="p-5 flex-grow">
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  {platform.description}
+                </p>
+              </div>
+
+              {/* Card Footer (Tags) */}
+              <div className="p-5 pt-0 mt-auto">
+                <div className="flex flex-wrap gap-2">
+                  {platform.tags.map((tag, tagIndex) => (
+                    <span 
+                      key={tagIndex} 
+                      className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] sm:text-xs font-bold border ${getTagStyle(tag)} transition-colors duration-300 hover:brightness-95`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* CTA Button */}
+                <a
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Explore Platform
+                </a>
+              </div>
+            </div>
+          ))
+        ) : (
+          /* Empty State if search yields no results */
+          <div className="col-span-full text-center py-12">
+            <Work className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+            <h3 className="text-lg font-medium text-gray-900">No platforms found</h3>
+            <p className="mt-1 text-gray-500">
+              We couldn't find any platforms matching "{searchQuery}". Try adjusting your search.
+            </p>
+            <button 
+              onClick={() => setSearchQuery('')}
+              className="mt-4 text-indigo-600 font-medium hover:text-indigo-800"
+            >
+              Clear search
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
-
-export default Internships

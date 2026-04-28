@@ -11,11 +11,17 @@ const IconUsers = ({ className }: { className?: string }) => <svg className={cla
 const IconArrowRight = ({ className }: { className?: string }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>;
 const IconBookOpen = ({ className }: { className?: string }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
 const IconBriefcase = ({ className }: { className?: string }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>;
+const IconAward = ({ className }: { className?: string }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>;
+const IconStar = ({ className }: { className?: string }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Platform Stats State
   const [liveUserCount, setLiveUserCount] = useState(1240);
+  const [certificationsCount, setCertificationsCount] = useState(45892);
+  const [mentorsCount, setMentorsCount] = useState(342);
 
   // Dynamically inject Tailwind CSS so the component works even if the project isn't configured for it
   useEffect(() => {
@@ -70,10 +76,19 @@ const Home = () => {
     return () => clearInterval(timer);
   }, [currentSlide]);
 
-  // Simulate Live User Count
+  // Simulate Live Platform Stats updates
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveUserCount(prev => prev + Math.floor(Math.random() * 7) - 3);
+      
+      // Occasionally simulate a new certification being issued
+      if (Math.random() > 0.7) {
+        setCertificationsCount(prev => prev + 1);
+      }
+      // Very rarely simulate a new mentor joining
+      if (Math.random() > 0.95) {
+        setMentorsCount(prev => prev + 1);
+      }
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -82,7 +97,8 @@ const Home = () => {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans pb-16">
+    // Added pb-20 to ensure content doesn't get hidden behind the new thicker footer
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans pb-20">
       
       {/* 1. Search Bar Section (Sticky & Prominent) */}
       <div className="bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-50 shadow-sm">
@@ -230,17 +246,38 @@ const Home = () => {
         </div>
       </div>
 
-      {/* 5. Live User Count Section (Footer Highlight) */}
+      {/* 5. Live Platform Stats Section (Enhanced Footer) */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900 border-t border-slate-800 text-white shadow-[0_-10px_30px_rgba(0,0,0,0.2)]">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-center">
-          <div className="flex items-center gap-3 bg-slate-800/50 px-6 py-2 rounded-full border border-slate-700 backdrop-blur-sm">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute w-4 h-4 bg-green-500 rounded-full animate-ping opacity-60"></div>
-              <div className="relative w-2.5 h-2.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)]"></div>
+        <div className="max-w-7xl mx-auto px-4 py-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex items-center justify-center gap-4 min-w-max">
+            
+            {/* Live Users */}
+            <div className="flex items-center gap-2 bg-slate-800/60 px-5 py-2 rounded-full border border-slate-700/50 backdrop-blur-sm transition-all hover:bg-slate-700/60 cursor-default">
+              <div className="relative flex items-center justify-center">
+                <div className="absolute w-3 h-3 bg-green-500 rounded-full animate-ping opacity-60"></div>
+                <div className="relative w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)]"></div>
+              </div>
+              <p className="text-sm font-medium text-slate-300 m-0">
+                <span className="text-white font-bold mx-1">{liveUserCount.toLocaleString()}</span> Online
+              </p>
             </div>
-            <p className="text-sm font-medium text-slate-200 m-0">
-              Currently <span className="text-white font-bold text-base mx-1">{liveUserCount.toLocaleString()}</span> users online
-            </p>
+
+            {/* Total Certifications */}
+            <div className="flex items-center gap-2 bg-slate-800/60 px-5 py-2 rounded-full border border-slate-700/50 backdrop-blur-sm transition-all hover:bg-slate-700/60 cursor-default">
+              <IconAward className="w-4 h-4 text-yellow-400" />
+              <p className="text-sm font-medium text-slate-300 m-0">
+                <span className="text-white font-bold mx-1">{certificationsCount.toLocaleString()}</span> Certifications
+              </p>
+            </div>
+
+            {/* Active Mentors */}
+            <div className="flex items-center gap-2 bg-slate-800/60 px-5 py-2 rounded-full border border-slate-700/50 backdrop-blur-sm transition-all hover:bg-slate-700/60 cursor-default">
+              <IconStar className="w-4 h-4 text-purple-400" />
+              <p className="text-sm font-medium text-slate-300 m-0">
+                <span className="text-white font-bold mx-1">{mentorsCount.toLocaleString()}</span> Mentors
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
