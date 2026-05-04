@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          max-width: 1200px;
+          width: 100%;
           margin: 0 auto;
         }
 
@@ -86,8 +86,49 @@ const Navbar: React.FC = () => {
 
         .nav-links {
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
-          gap: 20px;
+          justify-content: flex-end;
+          gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+          .navbar {
+            padding: 1rem 1rem;
+          }
+
+          .nav-container {
+            justify-content: center;
+          }
+
+          .nav-logo {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .nav-links {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .dropdown,
+          .theme-toggle,
+          .submit-btn {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .dropbtn {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+            padding: 10px 12px;
+          }
+
+          .theme-toggle,
+          .submit-btn {
+            padding: 10px 14px;
+          }
         }
 
         /* Dropdown Styles */

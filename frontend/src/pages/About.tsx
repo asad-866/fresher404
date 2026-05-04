@@ -41,13 +41,13 @@ const About = () => {
   ]
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 4 }}>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 3 }}>
         About Fresher404
       </Typography>
 
-      <Stack spacing={4}>
-        <Paper elevation={0} sx={{ p: 3, bgcolor: 'primary.light', color: 'white' }}>
+      <Stack spacing={3}>
+        <Paper elevation={0} sx={{ p: 2, bgcolor: 'primary.light', color: 'white' }}>
           <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
             Our Mission
           </Typography>

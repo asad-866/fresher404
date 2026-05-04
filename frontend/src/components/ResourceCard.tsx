@@ -42,9 +42,9 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
         },
       }}
     >
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>
-          <Typography variant="h6" component="h3" sx={{ fontWeight: 600, flex: 1, pr: 1 }}>
+      <CardContent sx={{ flexGrow: 1, p: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 0.5 }}>
+          <Typography variant="subtitle1" component="h3" sx={{ fontWeight: 600, flex: 1, pr: 1 }}>
             {name}
           </Typography>
           <Chip
@@ -55,7 +55,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
           />
         </Box>
 
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
           {description}
         </Typography>
 
@@ -75,7 +75,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
         </Stack>
       </CardContent>
 
-      <CardActions>
+      <CardActions sx={{ p: 2, pt: 0 }}>
         <Button
           fullWidth
           variant="contained"

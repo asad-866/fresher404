@@ -83,7 +83,7 @@ export default function Internships() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8 overflow-hidden w-full">
       {/* Add custom keyframes for entry animation */}
       <style>{`
         @keyframes fadeUp {
@@ -93,17 +93,17 @@ export default function Internships() {
       `}</style>
 
       {/* Header Section */}
-      <div className="max-w-7xl mx-auto mb-12 text-center">
-        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 sm:text-5xl drop-shadow-sm tracking-tight pb-2">
+      <div className="w-full mx-auto mb-8 text-center">
+        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 sm:text-4xl drop-shadow-sm tracking-tight pb-2">
           Internship Platforms
         </h1>
-        <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="mt-3 text-lg text-gray-600 max-w-full mx-auto">
           A curated list of the best websites to find internships. Filter by remote, paid, tech, and more to kickstart your career.
         </p>
       </div>
 
       {/* Search and Filter Section */}
-      <div className="max-w-3xl mx-auto mb-12 transition-transform duration-300 hover:scale-[1.02]">
+      <div className="w-full mx-auto mb-8 transition-transform duration-300 hover:scale-[1.02]">
         <div className="relative rounded-2xl shadow-lg bg-white">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="h-6 w-6 text-indigo-400" aria-hidden="true" />
@@ -120,7 +120,7 @@ export default function Internships() {
 
       {/* Responsive Grid Layout for Cards */}
       {/* Adjusted grid to 4 columns on large screens to make cards narrower */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="w-full mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {filteredPlatforms.length > 0 ? (
           filteredPlatforms.map((platform, index) => (
             <div 
@@ -136,8 +136,8 @@ export default function Internships() {
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
 
               {/* Card Header - Reduced padding and text size */}
-              <div className="p-5 pb-3 border-b border-gray-50 flex justify-between items-start">
-                <h2 className="text-xl font-extrabold text-gray-800 tracking-tight group-hover:text-indigo-600 transition-colors duration-300">
+              <div className="p-4 pb-2 border-b border-gray-50 flex justify-between items-start">
+                <h2 className="text-lg font-extrabold text-gray-800 tracking-tight group-hover:text-indigo-600 transition-colors duration-300">
                   {platform.name}
                 </h2>
                 <a 
@@ -152,14 +152,14 @@ export default function Internships() {
               </div>
               
               {/* Card Body - Reduced padding and text size */}
-              <div className="p-5 flex-grow">
+              <div className="p-4 flex-grow">
                 <p className="text-gray-600 leading-relaxed text-sm">
                   {platform.description}
                 </p>
               </div>
 
               {/* Card Footer (Tags) */}
-              <div className="p-5 pt-0 mt-auto">
+              <div className="p-4 pt-0 mt-auto">
                 <div className="flex flex-wrap gap-2">
                   {platform.tags.map((tag, tagIndex) => (
                     <span 
@@ -176,7 +176,7 @@ export default function Internships() {
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Explore Platform
                 </a>
@@ -185,7 +185,7 @@ export default function Internships() {
           ))
         ) : (
           /* Empty State if search yields no results */
-          <div className="col-span-full text-center py-12">
+          <div className="col-span-full text-center py-8">
             <Work className="mx-auto h-12 w-12 text-gray-400 mb-4" />
             <h3 className="text-lg font-medium text-gray-900">No platforms found</h3>
             <p className="mt-1 text-gray-500">

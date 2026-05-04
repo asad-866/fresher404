@@ -73,8 +73,8 @@ const Submit = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ py: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
+      <Box sx={{ py: 3 }}>
+        <Typography variant="h5" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
           Submit a Resource
         </Typography>
         <Typography variant="body1" color="text.secondary" paragraph>
@@ -82,7 +82,7 @@ const Submit = () => {
           competition, or fellowship that you think will help other freshers.
         </Typography>
 
-        <Paper elevation={1} sx={{ p: 4 }}>
+        <Paper elevation={1} sx={{ p: 3 }}>
           {success && (
             <Alert severity="success" sx={{ mb: 3 }}>
               Thank you! Your resource has been submitted successfully.

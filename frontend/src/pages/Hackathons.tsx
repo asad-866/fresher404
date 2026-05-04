@@ -36,7 +36,7 @@ const Hackathons = () => {
 
   if (loading) {
     return (
-      <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+      <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
         <CircularProgress />
       </Container>
     )
@@ -44,16 +44,16 @@ const Hackathons = () => {
 
   if (error) {
     return (
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>
       </Container>
     )
   }
 
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
+    <Container maxWidth="md">
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h5" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
           Hackathons
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -64,7 +64,7 @@ const Hackathons = () => {
       {resources.length === 0 ? (
         <Alert severity="info">No hackathons available yet.</Alert>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {resources.map((resource) => (
             <Grid item xs={12} sm={6} md={4} key={resource.id}>
               <ResourceCard {...resource} />
