@@ -120,12 +120,12 @@ export default function Internships() {
 
       {/* Responsive Grid Layout for Cards */}
       {/* Adjusted grid to 4 columns on large screens to make cards narrower */}
-      <div className="w-full mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="w-full mx-auto flex flex-wrap gap-4">
         {filteredPlatforms.length > 0 ? (
           filteredPlatforms.map((platform, index) => (
             <div 
               key={platform.id} 
-              className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 ease-out transform hover:-translate-y-2 flex flex-col border border-gray-100 overflow-hidden relative"
+              className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 ease-out transform hover:-translate-y-2 flex flex-col border border-gray-100 overflow-hidden relative w-full sm:w-1/2 lg:w-1/4"
               style={{ 
                 animation: `fadeUp 0.6s ease-out forwards`,
                 animationDelay: `${index * 0.1}s`,

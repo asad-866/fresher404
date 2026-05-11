@@ -41,7 +41,7 @@ const About = () => {
   ]
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="md" sx={{ py: 4 }} style={{ width: '100%' }}>
       <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 3 }}>
         About Fresher404
       </Typography>

@@ -51,7 +51,7 @@ function App() {
       <Router>
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar />
-          <Box component="main" sx={{ flex: 1, py: 4, px: { xs: 2, sm: 4 } }}>
+          <Box component="main" sx={{ flex: 1, width: '100%', overflow: 'auto' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/internships" element={<Internships />} />

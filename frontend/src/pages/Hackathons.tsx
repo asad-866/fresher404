@@ -64,7 +64,7 @@ const Hackathons = () => {
       {resources.length === 0 ? (
         <Alert severity="info">No hackathons available yet.</Alert>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} wrap="wrap" style={{ width: '100%' }}>
           {resources.map((resource) => (
             <Grid item xs={12} sm={6} md={4} key={resource.id}>
               <ResourceCard {...resource} />

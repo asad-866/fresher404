@@ -64,7 +64,7 @@ const Camps = () => {
       {resources.length === 0 ? (
         <Alert severity="info">No camps or fellowships available yet.</Alert>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} wrap="wrap" style={{ width: '100%' }}>
           {resources.map((resource) => (
             <Grid item xs={12} sm={6} md={4} key={resource.id}>
               <ResourceCard {...resource} />

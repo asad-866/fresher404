@@ -72,7 +72,7 @@ const Submit = () => {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={{ width: '100%' }}>
       <Box sx={{ py: 3 }}>
         <Typography variant="h5" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
           Submit a Resource

@@ -177,7 +177,7 @@ const Home = () => {
 
       {/* 3. Main Page Buttons Section */}
       <div className="w-full mx-auto px-4 mt-12">
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-6">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 w-full">
           <a href="#courses" className="group flex-1 min-w-[200px] flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-slate-800 rounded-2xl font-bold text-lg shadow-sm hover:shadow-lg hover:border-blue-500 hover:-translate-y-1 transition-all duration-300">
             <div className="p-2 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
               <IconBookOpen className="w-5 h-5" />
